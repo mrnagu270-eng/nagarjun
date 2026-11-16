@@ -1,0 +1,366 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Personal fitness profile and body metrics for an authenticated user (PII isolated to private subcollection).",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "age": {
+          "type": "number"
+        },
+        "heightCm": {
+          "type": "number"
+        },
+        "weightKg": {
+          "type": "number"
+        },
+        "targetWeightKg": {
+          "type": "number"
+        },
+        "goal": {
+          "type": "string",
+          "enum": ["Lose Weight", "Build Muscle", "Maintain Fitness", "Improve Endurance"]
+        },
+        "dailyCalorieTarget": {
+          "type": "number"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "name",
+        "age",
+        "heightCm",
+        "weightKg",
+        "targetWeightKg",
+        "goal",
+        "dailyCalorieTarget",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "UserPrivateInfo": {
+      "title": "UserPrivateInfo",
+      "description": "Isolated PII record containing user email address.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "minLength": 3,
+          "maxLength": 160
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["uid", "email", "updatedAt"]
+    },
+    "CustomWorkout": {
+      "title": "CustomWorkout",
+      "description": "User-created custom workout routine with instructions.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "muscleGroup": {
+          "type": "string",
+          "enum": ["Chest", "Back", "Legs", "Shoulders", "Arms", "Core", "Full Body"]
+        },
+        "difficulty": {
+          "type": "string",
+          "enum": ["Beginner", "Intermediate", "Advanced"]
+        },
+        "durationMin": {
+          "type": "number"
+        },
+        "caloriesEst": {
+          "type": "number"
+        },
+        "equipment": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "targetMuscles": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 160
+        },
+        "instructions": {
+          "type": "array"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "title",
+        "muscleGroup",
+        "difficulty",
+        "durationMin",
+        "caloriesEst",
+        "equipment",
+        "targetMuscles",
+        "instructions",
+        "createdAt"
+      ]
+    },
+    "CustomDietItem": {
+      "title": "CustomDietItem",
+      "description": "User-created custom food and macronutrient profile.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "Protein",
+            "Complex Carbs",
+            "Healthy Fats",
+            "Vegetables & Greens",
+            "Fruits",
+            "Dairy & Alternatives",
+            "Hydration & Recovery"
+          ]
+        },
+        "servingSize": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 80
+        },
+        "calories": {
+          "type": "number"
+        },
+        "proteinG": {
+          "type": "number"
+        },
+        "carbsG": {
+          "type": "number"
+        },
+        "fatG": {
+          "type": "number"
+        },
+        "fiberG": {
+          "type": "number"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 400
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "name",
+        "category",
+        "servingSize",
+        "calories",
+        "proteinG",
+        "carbsG",
+        "fatG",
+        "fiberG",
+        "description",
+        "createdAt"
+      ]
+    },
+    "ProgressRecord": {
+      "title": "ProgressRecord",
+      "description": "Recorded weigh-in or activity session for progress tracking.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "recordedDate": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "weightKg": {
+          "type": "number"
+        },
+        "activityType": {
+          "type": "string",
+          "enum": ["Strength Training", "Cardio", "Mobility & Recovery", "Weigh-In"]
+        },
+        "workoutTitle": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 120
+        },
+        "durationMin": {
+          "type": "number"
+        },
+        "caloriesBurned": {
+          "type": "number"
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 500
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "recordedDate",
+        "weightKg",
+        "activityType",
+        "workoutTitle",
+        "durationMin",
+        "caloriesBurned",
+        "notes",
+        "createdAt"
+      ]
+    },
+    "MealLog": {
+      "title": "MealLog",
+      "description": "Logged daily food serving and macro entry.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "foodName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "category": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 60
+        },
+        "servings": {
+          "type": "number"
+        },
+        "calories": {
+          "type": "number"
+        },
+        "proteinG": {
+          "type": "number"
+        },
+        "carbsG": {
+          "type": "number"
+        },
+        "fatG": {
+          "type": "number"
+        },
+        "loggedDate": {
+          "type": "string",
+          "minLength": 10,
+          "maxLength": 10,
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "mealSlot": {
+          "type": "string",
+          "enum": ["Breakfast", "Lunch", "Dinner", "Snack"]
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "uid",
+        "foodName",
+        "category",
+        "servings",
+        "calories",
+        "proteinG",
+        "carbsG",
+        "fatG",
+        "loggedDate",
+        "mealSlot",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Owner-scoped user fitness profile."
+    },
+    "/users/{userId}/private/{docId}": {
+      "schema": { "$ref": "#/entities/UserPrivateInfo" },
+      "description": "Owner-scoped isolated PII document."
+    },
+    "/users/{userId}/customWorkouts/{workoutId}": {
+      "schema": { "$ref": "#/entities/CustomWorkout" },
+      "description": "User-created custom workouts."
+    },
+    "/users/{userId}/customDietItems/{itemId}": {
+      "schema": { "$ref": "#/entities/CustomDietItem" },
+      "description": "User-created custom nutrition entries."
+    },
+    "/users/{userId}/progressRecords/{recordId}": {
+      "schema": { "$ref": "#/entities/ProgressRecord" },
+      "description": "User progress tracking check-ins and workout logs."
+    },
+    "/users/{userId}/mealLogs/{mealId}": {
+      "schema": { "$ref": "#/entities/MealLog" },
+      "description": "Daily meal logs for calorie and macro tracking."
+    }
+  }
+}

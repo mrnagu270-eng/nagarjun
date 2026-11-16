@@ -1,0 +1,6 @@
+{
+  "name": "Formline",
+  "description": "Personal fitness management workspace for workouts, BMI analysis, nutrition tracking, and progress history.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
